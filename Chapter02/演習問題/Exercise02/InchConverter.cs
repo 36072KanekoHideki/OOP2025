@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace DistanceConverter {
     public static class InchConverter {
 
-                //定数
+        //定数
         private const double ratio = 0.0254;
 
         //メートルからインチを求める
