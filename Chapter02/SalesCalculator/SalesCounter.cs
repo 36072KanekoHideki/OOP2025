@@ -29,7 +29,7 @@ namespace SalesCalculator {
             }
             return dict;
         }
-        
+
         //売り上げデータを読み込み、Saleオブジェクトのリストを返す
         public static List<Sale> ReadSales(string filePath) {
             //売り上げデータを入れるリストオブジェクトを生成
