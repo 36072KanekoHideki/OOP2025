@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,8 +13,8 @@ namespace SalesCalculator {
         private readonly List<Sale> _sales;
 
         //コンストラクタ
-        public SalesCounter(List<Sale> sales) {
-            _sales = sales;
+        public SalesCounter(String filePath) {
+            _sales = ReadSales(filePath);
         }
 
         //店舗別売り上げを求める
