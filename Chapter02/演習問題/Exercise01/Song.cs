@@ -8,21 +8,15 @@ using System.Threading.Tasks;
 namespace Exercise01 {
     //2.1.1
     public class Song {
-        public string Title { get; set; } = String.Empty;
-        public string ArtistName { get; set; } = String.Empty;
-        public int Length { get; set; } 
+        public string Title { get; private set; } = String.Empty;
+        public string ArtistName { get; private set; } = String.Empty;
+        public int Length { get; private set; }
 
-    //2.1.2
-        public Song(string Title, string ArtistName, int Length) {
-            this.Title = Title;
-            this.ArtistName = ArtistName;
-            this.Length = Length;
+        //2.1.2
+        public Song(string title, string artistname, int length) {
+            this.Title = title;
+            this.ArtistName = artistname;
+            this.Length = length;
         }
-
-
     }
-
- 
-
-
 }
