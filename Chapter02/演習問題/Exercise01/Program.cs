@@ -1,21 +1,54 @@
 ﻿using System.Reflection.Metadata;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Exercise01 {
     public class Program {
         static void Main(string[] args) {
-            //2.1.3
-            var songs = new Song[] {
-                new Song("Let it be", "The Beatles", 243),
-                new Song("Bridge Over Troubled Water", "Simon & Garfunkel", 293),
-                new Song("Close To You", "Carpenters", 276),
-                new Song("Honesty", "Billy Joel", 231),
-                new Song("I Will Always Love You", "Whitney Houston", 273),
-            };
+            //歌データを入れるリストオブジェクトを生成
+            var songs = new List<Song>();
+            //***** 曲の登録 *****を出力
+            Console.WriteLine("***** 曲の登録 *****");
+
+            //何があるかわからないので無限ループ
+            while (true) {
+                //"曲名"を出力
+                Console.Write("曲名:");
+                //入力された曲名を取得
+                string? title = Console.ReadLine();
+
+                //endが入力されたら登録終了
+                if (title.Equals("end",StringComparison.OrdinalIgnoreCase))
+                    break;
+
+                //"アーティスト名"を出力
+                Console.Write("アーティスト名:");
+                //入力されたアーティスト名を取得
+                string? artistName = Console.ReadLine();
+
+                //"演奏時間（秒）"を出力
+                Console.Write("演奏時間（秒）:");
+                //入力された演奏時間を取得
+                int length = int.Parse(Console.ReadLine());
+
+                //songインスタンスを生成
+                //Song song = new Song(title, artistName, length);
+                Song song = new Song() {
+                    Title = title,
+                    ArtistName = artistName,
+                    Length = length
+                };
+
+                //歌データを入れるリストオブジェクトへ登録
+                songs.Add(song);
+
+                Console.WriteLine();   //改行
+            }
+
             printSongs(songs);
         }
 
         //2.1.4
-        private static void printSongs(Song[] songs) {
+        private static void printSongs(IEnumerable<Song> songs) {
 #if false
             foreach (var song in songs) {
                 var minutes = song.Length / 60;
