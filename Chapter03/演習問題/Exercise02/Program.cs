@@ -41,11 +41,18 @@ namespace E0xercise02 {
             Console.WriteLine(count);
         }
         private static void Exercise2_3(List<string> names) {
-
+            var selected = names.Where(s => s.Contains('o'));
+            foreach (var name in selected) ;
+            Console.WriteLine(selected);
         }
 
         private static void Exercise2_4(List<string> names) {
+            var selected = names.Where(s => s.StartsWith('B'))
+                                .Select(s => new { s.Length });
 
+            foreach (var count in selected) {
+                Console.WriteLine(count);
+            }
         }
     }
 }
