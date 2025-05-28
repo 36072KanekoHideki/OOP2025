@@ -54,8 +54,9 @@ namespace Exercise02 {
         }
 
         private static void Exercise4(List<Book> books) {
-
-        }
+            var selected = books.First(s => s.Price >= 4000);
+                Console.WriteLine(selected.Title);
+            }
 
         private static void Exercise5(List<Book> books) {
 
