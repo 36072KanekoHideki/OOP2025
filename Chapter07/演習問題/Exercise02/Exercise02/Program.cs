@@ -37,19 +37,20 @@ namespace Exercise02 {
         }
 
         private static void Exercise1(List<Book> books) {
-            var selected = books.Where(s => s.Title.Contains("ワンダフル・C#ライフ"));
-            foreach(var item in selected) {
+            var book = books.Where(s => s.Title.Contains("ワンダフル・C#ライフ"));
+            foreach(var item in book) {
                 Console.WriteLine("Price:" + item.Price + " Pages:" + item.Pages);
             }
         }
 
         private static void Exercise2(List<Book> books) {
-            var selected = books.Count(s => s.Title.Contains("C#"));
-            Console.WriteLine(selected);
+            var count = books.Count(s => s.Title.Contains("C#"));
+            Console.WriteLine(count);
         }
 
         private static void Exercise3(List<Book> books) {
-
+            var average = books.Where(s => s.Title.Contains("C#")).Average(x => x.Pages);
+            Console.WriteLine((int)average);
         }
 
         private static void Exercise4(List<Book> books) {
