@@ -44,7 +44,8 @@ namespace Exercise02 {
         }
 
         private static void Exercise2(List<Book> books) {
-
+            var selected = books.Count(s => s.Title.Contains("C#"));
+            Console.WriteLine(selected);
         }
 
         private static void Exercise3(List<Book> books) {
