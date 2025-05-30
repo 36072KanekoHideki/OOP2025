@@ -1,4 +1,6 @@
 ﻿
+using System.Runtime.CompilerServices;
+
 namespace Exercise03 {
     internal class Program {
         static void Main(string[] args) {
@@ -21,7 +23,7 @@ namespace Exercise03 {
         }
 
         private static void Exercise1(string text) {
-            var count = text.Where(s => s == ' ').Count();
+            var count = text.Count(c => c == ' ');
             Console.WriteLine("空白数:"+ count);
         }
 
@@ -35,10 +37,17 @@ namespace Exercise03 {
         }
 
         private static void Exercise4(string text) {
-
+            var count = text.Split(' ').Length;
+            Console.WriteLine("単語数:{0}",count);
         }
 
         private static void Exercise5(string text) {
+            var words = text.Split(' ').Where(s => s.Length <= 4);
+
+            foreach (var word in words)
+                Console.WriteLine(word);
+            
+
 
         }
     }
