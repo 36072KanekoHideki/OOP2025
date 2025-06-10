@@ -1,4 +1,5 @@
 ﻿using Exercise01;
+using System.Data;
 
 namespace Exercise02 {
     public class Program {
@@ -24,12 +25,19 @@ namespace Exercise02 {
         }
 
         //5.2.2
-        private static void Exercise2(YearMonth[] ymCollection) {
 
+        private static void Exercise2(YearMonth[] ymCollection) {
+            foreach (var ym in ymCollection) {
+                Console.WriteLine(ym);
+            }
         }
 
-        //5.2.3
-        //ここにメソッドを作成【メソッド名：FindFirst21C】
+        //5.2.3メソッド名：FindFirst21C】
+        private static YearMonth? FindFirst21C(YearMonth[] ymColleciton) {
+
+            return null;
+
+        }
 
         //5.2.4
         private static void Exercise4(YearMonth[] ymCollection) {
