@@ -11,7 +11,7 @@ namespace Exercise01 {
         }
 
         private static void Exercise1(string text) {
-            var dict = new Dictionary<char, int>();
+            var dict = new SortedDictionary<char, int>();
 
             foreach (var c in text.ToUpper()) {
                 if ('A' <= c && c <= 'Z') {
@@ -22,7 +22,7 @@ namespace Exercise01 {
                     }
                 }
             }
-            foreach (var c in dict.OrderBy(c => c.Key))
+            foreach (var c in dict)
                 Console.WriteLine($"{c.Key}: {c.Value}");
 
         }
