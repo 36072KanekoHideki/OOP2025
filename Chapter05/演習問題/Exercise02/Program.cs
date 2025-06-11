@@ -52,17 +52,17 @@ namespace Exercise02 {
             } else {
                 Console.WriteLine(ym);
             }
+
+            //null合体演算子,null条件演算子
+            //Console.WriteLine(FindFirst21C(ymCollection)?.ToString() ?? "21世紀データはありません");
         }
 
 
         //5.2.5
         private static void Exercise5(YearMonth[] ymCollection) {
             var array = ymCollection.Select(x => x.AddOneMonth()).ToArray();
+            Exercise2(array);
 
-            foreach (var ym in ymCollection) {
-                Console.WriteLine(ym);
-
-            }
         }
     }
 }
