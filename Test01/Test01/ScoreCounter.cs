@@ -27,7 +27,7 @@
         public IDictionary<string, int> GetPerStudentScore() {
             var dict = new Dictionary<string, int>();
             foreach (var score in _score) {
-                if (dict.ContainsKey(score.Name)) {
+                if (dict.ContainsKey(score.Subjet)) {
                     dict[score.Subjet] += score.Score;
                 } else {
                     dict[score.Subjet] = score.Score;

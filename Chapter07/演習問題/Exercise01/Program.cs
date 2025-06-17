@@ -38,7 +38,7 @@
         }
 
         private static void Exercise4(int[] numbers) {
-            foreach (var n in numbers.Order().Take(3)) {
+            foreach (var n in numbers.Order()
                 Console.WriteLine(n);
             }
         }
