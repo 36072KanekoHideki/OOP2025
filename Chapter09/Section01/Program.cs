@@ -44,14 +44,29 @@ namespace Section01 {
 
             //③生まれてから〇〇〇〇日目です
 
+            var today = DateTime.Today;
+            var daysSinceBirth = (today - birthday).Days;
+            Console.WriteLine($"生まれてから {daysSinceBirth} 日目です");
 
-                
+            //④あなたは〇〇歳です
+
+            var age = today.Year - birthday.Year;
+            if (today < birthday.AddYears(age)) {
+                age--; 
+            }
+            Console.WriteLine($"あなたは {age} 歳です");
+
+            //⑤1月1日から何日目か
+
+            var dayOfYear = birthday.DayOfYear;
+            Console.WriteLine($"この日は1月1日から数えて {dayOfYear} 日目です");
+
             //②閏年の判定プログラムを作成する
             var isLeapYear = DateTime.IsLeapYear(birthday.Year);
             if (isLeapYear) {
-                Console.WriteLine("閏年です");
+                Console.WriteLine(year + "年は閏年です");
             } else {
-                Console.WriteLine("閏年ではありません");
+                Console.WriteLine(year + "年は平年です");
             }
         }
     }
