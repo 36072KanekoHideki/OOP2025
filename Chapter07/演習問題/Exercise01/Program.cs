@@ -38,10 +38,9 @@
         }
 
         private static void Exercise4(int[] numbers) {
-            foreach (var n in numbers.Order()
+            foreach (var n in numbers.Order())
                 Console.WriteLine(n);
             }
-        }
 
         private static void Exercise5(int[] numbers) {
             var count = numbers.Distinct().Count(n => n >= 10);
