@@ -27,6 +27,8 @@
             lbTitles = new ListBox();
             tbUrl = new TextBox();
             wvRssLink = new Microsoft.Web.WebView2.WinForms.WebView2();
+            btBrowserBack = new Button();
+            btBrowserForward = new Button();
             ((System.ComponentModel.ISupportInitialize)wvRssLink).BeginInit();
             SuspendLayout();
             // 
@@ -62,22 +64,44 @@
             tbUrl.Size = new Size(386, 31);
             tbUrl.TabIndex = 3;
             // 
-            // webView21
+            // wvRssLink
             // 
             wvRssLink.AllowExternalDrop = true;
             wvRssLink.CreationProperties = null;
             wvRssLink.DefaultBackgroundColor = Color.White;
             wvRssLink.Location = new Point(32, 275);
-            wvRssLink.Name = "webView21";
+            wvRssLink.Name = "wvRssLink";
             wvRssLink.Size = new Size(1039, 438);
             wvRssLink.TabIndex = 4;
             wvRssLink.ZoomFactor = 1D;
+            // 
+            // btBrowserBack
+            // 
+            btBrowserBack.Location = new Point(32, 69);
+            btBrowserBack.Name = "btBrowserBack";
+            btBrowserBack.Size = new Size(75, 23);
+            btBrowserBack.TabIndex = 5;
+            btBrowserBack.Text = "戻る";
+            btBrowserBack.UseVisualStyleBackColor = true;
+            btBrowserBack.Click += btBrowserBack_Click;
+            // 
+            // btBrowserForward
+            // 
+            btBrowserForward.Location = new Point(113, 69);
+            btBrowserForward.Name = "btBrowserForward";
+            btBrowserForward.Size = new Size(75, 23);
+            btBrowserForward.TabIndex = 6;
+            btBrowserForward.Text = "進む";
+            btBrowserForward.UseVisualStyleBackColor = true;
+            btBrowserForward.Click += btBrowserForward_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1095, 752);
+            Controls.Add(btBrowserForward);
+            Controls.Add(btBrowserBack);
             Controls.Add(wvRssLink);
             Controls.Add(tbUrl);
             Controls.Add(lbTitles);
@@ -94,5 +118,7 @@
         private ListBox lbTitles;
         private TextBox tbUrl;
         private Microsoft.Web.WebView2.WinForms.WebView2 wvRssLink;
+        private Button btBrowserBack;
+        private Button btBrowserForward;
     }
 }

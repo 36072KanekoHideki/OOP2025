@@ -1,4 +1,5 @@
 using System.Net;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
@@ -36,8 +37,16 @@ namespace RssReader {
         //タイトルを選択(クリック)したときに呼ばれるイベントハンドラ
         private void lbTitles_Click(object sender, EventArgs e) {
             wvRssLink.Source = new Uri(items[lbTitles.SelectedIndex].Link);
+        }
 
+        private void btBrowserBack_Click(object sender, EventArgs e) {
+            wvRssLink.GoBack();
+        }
+
+        private void btBrowserForward_Click(object sender, EventArgs e) {
+            wvRssLink.GoForward();
         }
     }
 }
+
 
