@@ -9,6 +9,9 @@ namespace RssReader {
 
         private List<ItemData> items;
 
+        private List<string> favoriteUrls = new List<string>();
+
+
         Dictionary<string, string> rssUrlDict = new Dictionary<string, string>() {
             {"主要","https://news.yahoo.co.jp/rss/topics/top-picks.xml" },
             {"国内","https://news.yahoo.co.jp/rss/topics/domestic.xml" },
@@ -18,7 +21,7 @@ namespace RssReader {
             {"スポーツ","https://news.yahoo.co.jp/rss/topics/sports.xml" },
             {"IT","https://news.yahoo.co.jp/rss/topics/it.xml" },
             {"科学","https://news.yahoo.co.jp/rss/topics/science.xml" },
-            {"Pen online","https://news.yahoo.co.jp/rss/media/penonline/all.xml" },
+            {"地域","https://news.yahoo.co.jp/rss/categories/local.xml" },
         };
 
 
@@ -90,6 +93,65 @@ namespace RssReader {
         private void wvRssLink_SourceChanged(object sender, Microsoft.Web.WebView2.Core.CoreWebView2SourceChangedEventArgs e) {
             btGoBack.Enabled = wvRssLink.CanGoBack;
             btGoForward.Enabled = wvRssLink.CanGoForward;
+        }
+
+        private void btAddFavorite_Click(object sender, EventArgs e) {
+
+            string selectedUrl = getRssUrl(cbUrl.Text);
+            string favoriteName = txtFavoriteName.Text.Trim();
+
+            if (string.IsNullOrEmpty(favoriteName)) {
+                MessageBox.Show("お気に入りの名前を入力してください。");
+                return;
+            }
+
+            // 名前の重複チェック
+            if (rssUrlDict.ContainsKey(favoriteName)) {
+                MessageBox.Show("この名前はすでに使用されています。別の名前を入力してください。");
+                return;
+            }
+
+            // URLの重複チェック（同じURLが別名で登録されるのは許容するかはお好みで）
+            if (!favoriteUrls.Contains(selectedUrl)) {
+                favoriteUrls.Add(selectedUrl);
+            }
+
+            rssUrlDict.Add(favoriteName, selectedUrl);
+
+            // コンボボックスを更新
+            cbUrl.DataSource = null;
+            cbUrl.DataSource = rssUrlDict.Select(k => k.Key).ToList();
+
+            // テキストボックスをクリア
+            txtFavoriteName.Text = "";
+
+        }
+
+        private void lbTitles_DrawItem(object sender, DrawItemEventArgs e) {
+            var idx = e.Index;                                                      //描画対象の行
+            if (idx == -1) return;                                                  //範囲外なら何もしない
+            var sts = e.State;                                                      //セルの状態
+            var fnt = e.Font;                                                       //フォント
+            var _bnd = e.Bounds;                                                    //描画範囲(オリジナル)
+            var bnd = new RectangleF(_bnd.X, _bnd.Y, _bnd.Width, _bnd.Height);     //描画範囲(描画用)
+            var txt = (string)lbTitles.Items[idx];                                  //リストボックス内の文字
+            var bsh = new SolidBrush(lbTitles.ForeColor);                           //文字色
+            var sel = (DrawItemState.Selected == (sts & DrawItemState.Selected));   //選択行か
+            var odd = (idx % 2 == 1);                                               //奇数行か
+            var fore = Brushes.WhiteSmoke;                                         //偶数行の背景色
+            var bak = Brushes.AliceBlue;                                           //奇数行の背景色
+
+            e.DrawBackground();                                                     //背景描画
+
+            //奇数項目の背景色を変える（選択行は除く）
+            if (odd && !sel) {
+                e.Graphics.FillRectangle(bak, bnd);
+            } else if (!odd && !sel) {
+                e.Graphics.FillRectangle(fore, bnd);
+            }
+
+            //文字を描画
+            e.Graphics.DrawString(txt, fnt, bsh, bnd);
         }
     }
 }
