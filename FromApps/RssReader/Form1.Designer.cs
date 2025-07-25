@@ -25,10 +25,10 @@
         private void InitializeComponent() {
             btRssGet = new Button();
             lbTitles = new ListBox();
-            tbUrl = new TextBox();
             wvRssLink = new Microsoft.Web.WebView2.WinForms.WebView2();
-            btBrowserBack = new Button();
-            btBrowserForward = new Button();
+            btGoBack = new Button();
+            btGoForward = new Button();
+            cbUrl = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)wvRssLink).BeginInit();
             SuspendLayout();
             // 
@@ -55,15 +55,6 @@
             lbTitles.TabIndex = 2;
             lbTitles.Click += lbTitles_Click;
             // 
-            // tbUrl
-            // 
-            tbUrl.Font = new Font("Yu Gothic UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 128);
-            tbUrl.Location = new Point(32, 20);
-            tbUrl.Multiline = true;
-            tbUrl.Name = "tbUrl";
-            tbUrl.Size = new Size(386, 31);
-            tbUrl.TabIndex = 3;
-            // 
             // wvRssLink
             // 
             wvRssLink.AllowExternalDrop = true;
@@ -74,51 +65,61 @@
             wvRssLink.Size = new Size(1039, 438);
             wvRssLink.TabIndex = 4;
             wvRssLink.ZoomFactor = 1D;
+            wvRssLink.SourceChanged += wvRssLink_SourceChanged;
             // 
-            // btBrowserBack
+            // btGoBack
             // 
-            btBrowserBack.Location = new Point(32, 69);
-            btBrowserBack.Name = "btBrowserBack";
-            btBrowserBack.Size = new Size(75, 23);
-            btBrowserBack.TabIndex = 5;
-            btBrowserBack.Text = "戻る";
-            btBrowserBack.UseVisualStyleBackColor = true;
-            btBrowserBack.Click += btBrowserBack_Click;
+            btGoBack.Location = new Point(32, 69);
+            btGoBack.Name = "btGoBack";
+            btGoBack.Size = new Size(75, 23);
+            btGoBack.TabIndex = 5;
+            btGoBack.Text = "戻る";
+            btGoBack.UseVisualStyleBackColor = true;
+            btGoBack.Click += btGoBack_Click_1;
             // 
-            // btBrowserForward
+            // btGoForward
             // 
-            btBrowserForward.Location = new Point(113, 69);
-            btBrowserForward.Name = "btBrowserForward";
-            btBrowserForward.Size = new Size(75, 23);
-            btBrowserForward.TabIndex = 6;
-            btBrowserForward.Text = "進む";
-            btBrowserForward.UseVisualStyleBackColor = true;
-            btBrowserForward.Click += btBrowserForward_Click;
+            btGoForward.Location = new Point(113, 69);
+            btGoForward.Name = "btGoForward";
+            btGoForward.Size = new Size(75, 23);
+            btGoForward.TabIndex = 6;
+            btGoForward.Text = "進む";
+            btGoForward.UseVisualStyleBackColor = true;
+            btGoForward.Click += btGoForward_Click;
+            // 
+            // cbUrl
+            // 
+            cbUrl.Font = new Font("Yu Gothic UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 128);
+            cbUrl.FormattingEnabled = true;
+            cbUrl.Location = new Point(32, 22);
+            cbUrl.Name = "cbUrl";
+            cbUrl.Size = new Size(386, 29);
+            cbUrl.TabIndex = 7;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1095, 752);
-            Controls.Add(btBrowserForward);
-            Controls.Add(btBrowserBack);
+            Controls.Add(cbUrl);
+            Controls.Add(btGoForward);
+            Controls.Add(btGoBack);
             Controls.Add(wvRssLink);
-            Controls.Add(tbUrl);
             Controls.Add(lbTitles);
             Controls.Add(btRssGet);
             Name = "Form1";
             Text = "RSSリーダー";
+            Load += Form1_Load_1;
             ((System.ComponentModel.ISupportInitialize)wvRssLink).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
         private Button btRssGet;
         private ListBox lbTitles;
-        private TextBox tbUrl;
         private Microsoft.Web.WebView2.WinForms.WebView2 wvRssLink;
-        private Button btBrowserBack;
-        private Button btBrowserForward;
+        private Button btGoBack;
+        private Button btGoForward;
+        private ComboBox cbUrl;
     }
 }
