@@ -5,10 +5,45 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SampleApplication"
         mc:Ignorable="d"
-        Title="SampleApplication" Height="300" Width="300">
+        Title="SampleApplication" Height="300" Width="300" FontSize="14">
     <Grid>
-        <Button Content="ボタン" Width="100" Height="30" Click="Button_Click" RenderTransform="0.5,0.5">
-            
-        </Button>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="100*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Center" Text="項目" />
+        <TextBlock Grid.Column="2" Text="設定値" />
+        <Label Grid.Row="1" Content="ON/OFF(_0)"/>
+        <CheckBox x:Name="checkBox" Grid.Row="1" Grid.Column="1" Content="チェックしたらON"
+                  VerticalAlignment="Center" />
+        <TextBox x:Name="checkBoxTextBlock" Grid.Row="1" Grid.Column="2"
+                  VerticalAlignment="Center" />
+        <Label Grid.Row="2" Content="色(_C)"/>
+        <StackPanel Grid.Row="2" Grid.Column="1">
+            <RadioButton x:Name="radRadioButton" GroupName="Color" Content="赤"/>
+            <RadioButton x:Name="yellowRadioButton" GroupName="Color" Content="黄"/>
+            <RadioButton x:Name="blueRadioButton" GroupName="Color" Content="青"/>
+        </StackPanel>
+        <TextBlock x:Name="colorText" Grid.Row="2" Grid.Column="2"/>
+        <Label Grid.Row="3" Content="季節(_S)"/>
+        <ComboBox x:Name="seasonComboBox" Grid.Row="3" Grid.Column="1">
+            <ComboBoxItem Content="春"/>
+            <ComboBoxItem Content="夏"/>
+            <ComboBoxItem Content="秋"/>
+            <ComboBoxItem Content="冬"/>
+        </ComboBox>
+        <TextBlock x:Name="seasonTextBlock" Grid.Row="3" Grid.Column="2"/>
+        
+        
+        
     </Grid>
 </Window>
