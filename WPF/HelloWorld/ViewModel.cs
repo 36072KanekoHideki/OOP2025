@@ -11,24 +11,28 @@ namespace HelloWorld
     class ViewModel : BindableBase
     {
         public ViewModel() {
-            ChangeMessageCommand = new DelegateCommand(
-                ()=> GreetingMessage = "See ya");
+            ChangeMessageCommand = new DelegateCommand<string>(
+                (par) => GreetingMessage = par);
         }
 
         private string _greetingMessage = "Hellow World";
         public string GreetingMessage {
             get => _greetingMessage;
-            set => SetProperty(ref _greetingMessage, value);
-                
-                //{
-                //if (_greetingMessage != value) {
-                //    _greetingMessage = value;
-                //    PropertyChanged?.Invoke(
-                //        this, new PropertyChangedEventArgs(nameof(GreetingMessage)));
-                //}
-            //}
+            set {
+                    if(SetProperty(ref _greetingMessage, value)) {
+                    CanChangeMessage = false;
+                }
+            }
         }
 
-        public DelegateCommand ChangeMessageCommand { get; }
+        private bool _canChangeMessage = true;
+        public bool CanChangeMessage {
+            get => _canChangeMessage;
+            private set => SetProperty(ref _canChangeMessage, value);
+        }
+
+        public string NewMessage1 { get; } = "See ya";
+        public string NewMessage2 { get; } = "Bye";
+        public DelegateCommand<string> ChangeMessageCommand { get; }
     }
 }
