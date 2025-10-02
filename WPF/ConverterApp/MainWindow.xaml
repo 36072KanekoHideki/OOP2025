@@ -9,7 +9,7 @@
     <StackPanel>
         <StackPanel Orientation="Horizontal">
             <TextBox Name="MetricValue" Margin="4" Width="100" />
-            <ComboBox Name="MetricUnit" Margin="4" Width="80" />
+            <ComboBox Name="MetricUnit" Margin="4" Width="80" SelectionChanged="MetricUnit_SelectionChanged"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -17,9 +17,9 @@
             <Button Name="MetricToImperialUnit" Margin="4" Width="40" Content="▼" Click="MetricToImperialUnit_Click" />
         </StackPanel>
 
-        <StackPanel>
+        <StackPanel Orientation="Horizontal">
             <TextBox Name="ImperialValue" Margin="4" Width="100" />
-            <ComboBox Name="ImperialUnit" Margin="4" Width="80" />
+            <ComboBox Name="ImperialUnit" Margin="4" Width="80" SelectionChanged="ImperialUnit_SelectionChanged" />
         </StackPanel>
     </StackPanel>
 </Window>
