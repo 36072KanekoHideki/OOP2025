@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace Section03 {
@@ -8,13 +9,16 @@ namespace Section03 {
 
         private async void  button1_Click(object sender, EventArgs e) {
             statusStrip1.Text = "";
-            await Task.Run(()=> DoLongTimeWokr());
-            statusStrip1.Text = "終了";
-
+            var elapsed = await Task.Run(()=> DoLongTimeWokr());
+            toolStripStatusLabel1.Text = $"{elapsed}ミリ秒";
         }
+        //戻り値のあるメソッド
+        private long DoLongTimeWokr() {
+            var sw = Stopwatch.StartNew();
 
-        private void DoLongTimeWokr() {
             System.Threading.Thread.Sleep(5000);
+            sw.Stop();
+            return sw.ElapsedMilliseconds;
         }
     }
 }
