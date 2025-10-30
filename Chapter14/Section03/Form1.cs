@@ -7,16 +7,18 @@ namespace Section03 {
             InitializeComponent();
         }
 
-        private async void  button1_Click(object sender, EventArgs e) {
-            statusStrip1.Text = "";
-            var elapsed = await Task.Run(()=> DoLongTimeWokr());
+        private async void button1_Click(object sender, EventArgs e) {
+            toolStripStatusLabel1.Text = "";
+            var elapsed = await DoLongTimeWorkAsync(4000);
             toolStripStatusLabel1.Text = $"{elapsed}ミリ秒";
-        }
-        //戻り値のあるメソッド
-        private long DoLongTimeWokr() {
-            var sw = Stopwatch.StartNew();
 
-            System.Threading.Thread.Sleep(5000);
+        }
+
+        private async Task<long> DoLongTimeWorkAsync(int millisecond) {
+            var sw = Stopwatch.StartNew();
+            await Task.Run(() => {
+                System.Threading.Thread.Sleep(millisecond);
+            });
             sw.Stop();
             return sw.ElapsedMilliseconds;
         }

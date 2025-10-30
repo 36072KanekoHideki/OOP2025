@@ -31,9 +31,9 @@
             // 
             // button1
             // 
-            button1.Location = new Point(285, 115);
+            button1.Location = new Point(147, 77);
             button1.Name = "button1";
-            button1.Size = new Size(75, 23);
+            button1.Size = new Size(122, 64);
             button1.TabIndex = 0;
             button1.Text = "button1";
             button1.UseVisualStyleBackColor = true;
@@ -42,9 +42,9 @@
             // statusStrip1
             // 
             statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel1 });
-            statusStrip1.Location = new Point(0, 428);
+            statusStrip1.Location = new Point(0, 223);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(800, 22);
+            statusStrip1.Size = new Size(450, 22);
             statusStrip1.TabIndex = 1;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -58,7 +58,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(450, 245);
             Controls.Add(statusStrip1);
             Controls.Add(button1);
             Name = "Form1";
