@@ -10,8 +10,11 @@
                                         Books = books,
                                     });
 
-            foreach (var book in books) {
-                Console.WriteLine($"{book!.Title}年 {book!.category} ({book!.PublishedYear})");
+            foreach (var group in groups) {
+                Console.WriteLine(group.Category);
+                foreach(var book in group.Books) {
+                    Console.WriteLine($"   {book.Title} ({book.PublishedYear})年");
+                }
             }
         }
     }
