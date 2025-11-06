@@ -35,24 +35,33 @@ namespace ColorChecker {
 
         //すべてのスライダーから呼ばれるイベントハンドラ
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
-            //colorAreaの色(背景色)は、スライダーで指定したRGBの色を表示する
             currentColor = new MyColor {
                 Color = Color.FromRgb((byte)rSlider.Value, (byte)gSlider.Value, (byte)bSlider.Value),
                 Name = ((MyColor[])DataContext).Where(c => c.Color.R == (byte)rSlider.Value &&
-                                                      c.Color.G == (byte)gSlider.Value &&
-                                                      c.Color.B == (byte)bSlider.Value).Select(x => x.Name).FirstOrDefault()
+                                                            c.Color.G == (byte)gSlider.Value &&
+                                                            c.Color.B == (byte)bSlider.Value).Select(x => x.Name).FirstOrDefault()
             };
 
             colorArea.Background = new SolidColorBrush(currentColor.Color);
+
+            int index = GetColorToIndex(currentColor.Color);
+            if (index != -1) {
+                if (colorSelectComboBox.SelectedIndex != index) {
+                    colorSelectComboBox.SelectedIndex = index;
+                }
+            } else {
+                colorSelectComboBox.SelectedIndex = -1;
+            }
         }
 
-        private void stockList_SelectionChanged(object sender, SelectionChangedEventArgs e) {
 
-            if (!stockList.Items.Contains(currentColor)) {
-                stockList.Items.Insert(0, currentColor);
-            } else {
-                MessageBox.Show("既に登録済みです", "ColorChecker", MessageBoxButton.OK, MessageBoxImage.Warning);
-                colorSelectComboBox.SelectedItem = null;
+        private void stockList_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            if (stockList.SelectedItem is MyColor selectedColor) {
+                setSliderValue(selectedColor.Color);
+                currentColor = selectedColor;
+
+                int index = GetColorToIndex(currentColor.Color);
+                colorSelectComboBox.SelectedIndex = index != -1 ? index : -1;
             }
         }
 
@@ -76,6 +85,7 @@ namespace ColorChecker {
             setSliderValue(((MyColor)((ComboBox)sender).SelectedItem).Color);
             currentColor = (MyColor)((ComboBox)sender).SelectedItem;
         }
+
 
         private void setSliderValue(Color color) {
             rSlider.Value = color.R;

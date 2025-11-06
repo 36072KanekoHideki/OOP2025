@@ -11,27 +11,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Net.Http;
-using System.Text.Json;
-using System.Threading.Tasks;
 using System.Linq;
+
 namespace CustomerApp;
 
-/// <summary>
-/// Interaction logic for MainWindow.xaml
-/// </summary>
 public partial class MainWindow : Window {
     private byte[] selectedImageBytes;
-
     private List<Customer> _customer = new List<Customer>();
 
     public MainWindow() {
         InitializeComponent();
         ReadDatabase();
-
         CustomerListView.ItemsSource = _customer;
     }
-
 
     private void ReadDatabase() {
         using (var connection = new SQLiteConnection(App.databasePath)) {
@@ -39,7 +31,6 @@ public partial class MainWindow : Window {
             _customer = connection.Table<Customer>().ToList();
         }
     }
-
 
     private void SaveButton_Click(object sender, RoutedEventArgs e) {
         var customer = new Customer() {
@@ -65,23 +56,19 @@ public partial class MainWindow : Window {
             return;
         }
 
-        //データベース接続
         using (var connection = new SQLiteConnection(App.databasePath)) {
             connection.CreateTable<Customer>();
             connection.Delete(item);
-            ReadDatabase();     //データベースから選択されているレコードの削除
+            ReadDatabase();
             CustomerListView.ItemsSource = _customer;
         }
     }
 
-    //リストビューのフィルタリング
     private void SerchTextBox_TextChanged(object sender, TextChangedEventArgs e) {
         var filterList = _customer.Where(p => p.Name.Contains(SerchTextBox.Text));
-
         CustomerListView.ItemsSource = filterList;
     }
 
-    //リストビューから１レコード選択
     private void CustomerListView_SelectionChanged(object sender, SelectionChangedEventArgs e) {
         var selectedCustomer = CustomerListView.SelectedItem as Customer;
         if (selectedCustomer is null) return;
@@ -143,21 +130,4 @@ public partial class MainWindow : Window {
             SelectedImage.Source = bitmap;
         }
     }
-
-    private async void PostalCodeTextBox_TextChanged(object sender, TextChangedEventArgs e) {
-        string postalCode = PostalCodeTextBox.Text.Trim();
-        if (postalCode.Length == 7 && postalCode.All(char.IsDigit)) {
-            try {
-                var service = new PostalCodeService();
-                var address = await service.GetAddressFromPostalCodeAsync(postalCode);
-                if (address != null) {
-                    AddressTextBox.Text = $"{address.Prefecture}{address.City}{address.Town}";
-                }
-            }
-            catch (Exception ex) {
-                MessageBox.Show("住所の取得に失敗しました: " + ex.Message);
-            }
-        }
-    }
-
 }
