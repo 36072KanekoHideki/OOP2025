@@ -9,9 +9,6 @@ namespace TextFileProcessorDI {
         private ITextFilrService _service;
 
         //コンストラクター
-        public TextFileProcessor(ITextFilrService service) {
-            _service = service;
-        }
 
         public void Run(string fileName) {
             _service.Initialize(fileName);
@@ -21,6 +18,9 @@ namespace TextFileProcessorDI {
                 _service.Execute(line);
             }
             _service.Terminate();
+        }
+        public TextFileProcessor(ITextFilrService service) {
+            _service = service;
         }
     }
 }
