@@ -5,8 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TenkiApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="600" Width="1066" WindowStartupLocation="CenterScreen">
 
+    <Grid x:Name="MainGrid" Opacity="0">
+        <!-- 上部ヘッダー -->
+        <StackPanel VerticalAlignment="Top" Margin="20">
+            <TextBlock x:Name="CityText" Text="東京" FontSize="28" FontWeight="Bold" Foreground="White"/>
+            <TextBlock x:Name="DateText" Text="取得時刻：" FontSize="16" Foreground="White"/>
+        </StackPanel>
+
+        <!-- 中央の現在の天気 -->
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock x:Name="WeatherIcon" Text="☀️" FontSize="72" HorizontalAlignment="Center"/>
+            <TextBlock x:Name="TemperatureText" Text="-- ℃" FontSize="48" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center"/>
+            <TextBlock x:Name="DescriptionText" Text="風速: -- m/s, 湿度: -- %" FontSize="18" Foreground="White" HorizontalAlignment="Center"/>
+        </StackPanel>
+
+        <!-- 背景切り替え選択 -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="20">
+            <ComboBox x:Name="BackgroundSelector" Width="120" SelectionChanged="BackgroundSelector_SelectionChanged">
+                <ComboBoxItem Content="朝"/>
+                <ComboBoxItem Content="昼"/>
+                <ComboBoxItem Content="夕方"/>
+                <ComboBoxItem Content="夜"/>
+            </ComboBox>
+        </StackPanel>
     </Grid>
 </Window>
