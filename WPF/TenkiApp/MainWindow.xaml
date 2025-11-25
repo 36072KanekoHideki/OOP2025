@@ -5,30 +5,109 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TenkiApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="1066" WindowStartupLocation="CenterScreen">
+        Title="MainWindow" Height="800" Width="1200" WindowStartupLocation="CenterScreen">
 
-    <Grid x:Name="MainGrid" Opacity="0">
-        <!-- 上部ヘッダー -->
-        <StackPanel VerticalAlignment="Top" Margin="20">
-            <TextBlock x:Name="CityText" Text="東京" FontSize="28" FontWeight="Bold" Foreground="White"/>
-            <TextBlock x:Name="DateText" Text="取得時刻：" FontSize="16" Foreground="White"/>
-        </StackPanel>
+    <Grid>
+        <!-- シンプルビュー -->
+        <Grid x:Name="SimpleView" Opacity="1">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock x:Name="WeatherIcon" Text="☀️" FontSize="72" HorizontalAlignment="Center"/>
+                <TextBlock x:Name="TemperatureText" Text="-- ℃" FontSize="48" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center"/>
+                <TextBlock x:Name="CityText" Text="東京" FontSize="28" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Grid>
 
-        <!-- 中央の現在の天気 -->
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-            <TextBlock x:Name="WeatherIcon" Text="☀️" FontSize="72" HorizontalAlignment="Center"/>
-            <TextBlock x:Name="TemperatureText" Text="-- ℃" FontSize="48" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center"/>
-            <TextBlock x:Name="DescriptionText" Text="風速: -- m/s, 湿度: -- %" FontSize="18" Foreground="White" HorizontalAlignment="Center"/>
-        </StackPanel>
+        <!-- 詳細ビュー -->
+        <Grid x:Name="DetailView" Opacity="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="200"/>
+            </Grid.RowDefinitions>
 
-        <!-- 背景切り替え選択 -->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="20">
-            <ComboBox x:Name="BackgroundSelector" Width="120" SelectionChanged="BackgroundSelector_SelectionChanged">
-                <ComboBoxItem Content="朝"/>
-                <ComboBoxItem Content="昼"/>
-                <ComboBoxItem Content="夕方"/>
-                <ComboBoxItem Content="夜"/>
-            </ComboBox>
-        </StackPanel>
+            <!-- 左上の都市名 -->
+            <TextBlock x:Name="CityTextDetail"
+                       Text="東京"
+                       FontSize="28"
+                       FontWeight="Bold"
+                       Foreground="White"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Margin="20,10,0,0"
+                       Grid.Row="0"/>
+
+            <!-- 取得時刻 -->
+            <TextBlock x:Name="DateText"
+                       Text="取得時刻："
+                       FontSize="16"
+                       Foreground="White"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Margin="20,50,0,0"
+                       Grid.Row="0"/>
+
+            <!-- 背景切り替え選択＋検索窓（右上） -->
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Margin="20,20,20,0"
+                        Grid.Row="0">
+                <ComboBox x:Name="BackgroundSelector" Width="120" SelectionChanged="BackgroundSelector_SelectionChanged">
+                    <ComboBoxItem Content="朝"/>
+                    <ComboBoxItem Content="昼"/>
+                    <ComboBoxItem Content="夕方"/>
+                    <ComboBoxItem Content="夜"/>
+                </ComboBox>
+
+                <!-- 検索窓 -->
+                <TextBox x:Name="SearchBox" Width="150" Margin="10,0,0,0" 
+                         VerticalAlignment="Center" 
+                         ToolTip="都道府県を入力してください"/>
+                <Button Content="検索" Click="SearchButton_Click" Margin="5,0,0,0"/>
+            </StackPanel>
+
+            <!-- 中央部分：左パネルと週間予報を横並び -->
+            <Grid Grid.Row="1" Margin="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="420"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- 左側の天気詳細パネル -->
+                <StackPanel Orientation="Vertical"
+                            VerticalAlignment="Top"
+                            HorizontalAlignment="Left"
+                            Width="400"
+                            Margin="0,0,20,0"
+                            Grid.Column="0">
+                    <Border Background="#44FFFFFF" CornerRadius="10" Padding="15" Margin="0,0,20,0"
+                            Grid.Column="0">
+                        <StackPanel>
+                            <TextBlock Text="現在の天気" FontSize="20" Foreground="Black"/>
+                            <TextBlock x:Name="WeatherIconDetail" Text="☀️" FontSize="48" HorizontalAlignment="Left"/>
+                            <TextBlock x:Name="TemperatureTextDetail" Text="-- ℃" FontSize="24" FontWeight="Bold" Foreground="Black"/>
+                            <TextBlock x:Name="DescriptionText" Text="風速: -- m/s, 湿度: -- %" FontSize="18" Foreground="Black"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+
+                <!-- 週間予報パネル -->
+                <Border Background="#44FFFFFF" CornerRadius="10" Padding="15" Margin="20,0,0,0"
+                        HorizontalAlignment="Left" VerticalAlignment="Top"
+                        Height="400" Width="300"
+                        Grid.Column="1">
+                    <StackPanel Orientation="Vertical" x:Name="WeeklyForecastPanelVertical"/>
+                </Border>
+            </Grid>
+
+            <!-- 下段の時間予報パネル -->
+            <Border Background="#44FFFFFF" CornerRadius="10" Padding="10" Margin="20"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
+                    Grid.Row="2" Height="150">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                    <StackPanel Orientation="Horizontal" x:Name="HourlyForecastPanel"/>
+                </ScrollViewer>
+            </Border>
+        </Grid>
     </Grid>
 </Window>
