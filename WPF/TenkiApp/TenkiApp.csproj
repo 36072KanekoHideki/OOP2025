@@ -8,4 +8,26 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Images\cloudy.png" />
+    <None Remove="Images\japan.png" />
+    <None Remove="Images\Mainly-clear.png" />
+    <None Remove="Images\rain.png" />
+    <None Remove="Images\sun.png" />
+    <None Remove="Images\thermometer.png" />
+    <None Remove="Images\wind.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\cloudy.png" />
+    <Resource Include="Images\japan.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Mainly-clear.png" />
+    <Resource Include="Images\rain.png" />
+    <Resource Include="Images\sun.png" />
+    <Resource Include="Images\thermometer.png" />
+    <Resource Include="Images\wind.png" />
+  </ItemGroup>
+
 </Project>

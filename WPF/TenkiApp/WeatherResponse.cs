@@ -16,6 +16,7 @@ namespace TenkiApp {
         public double temperature_2m { get; set; }
         public double wind_speed_10m { get; set; }
         public double relative_humidity_2m { get; set; }
+        public int weathercode { get; set; }   // ← ここを追加
     }
 
     public class Daily {
